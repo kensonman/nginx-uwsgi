@@ -15,3 +15,18 @@ The image configured the features as below:
 The Dockerfile and related resources can be found on: [GitHub - https://github.com/kensonman/nginx-uwsgi](https://github.com/kensonman/nginx-uwsgi).
 
 
+Usage
+======
+Execute the container with below commands:
+
+    docker pull kensonman/nginx-uwsgi:latest
+    docker run -u 0 -it kensonman/nginx-uwsgi:latest bash
+        #Install the python library that you need
+        # e.g.: pip install -r requirements.txt
+        # e.g.: pip install django django-methodoverride
+    docker run --rm -d -p 80:80 \
+        -v <webapps-dir>:/usr/share/nginx/html:rw \
+        -v <project-dir>:/usr/share/nginx/html/conf:ro \
+        -v <static-dir>:/usr/share/nginx/html/static:ro \
+        -v <media-dir>:/usr/share/nginx/html/media:rw \
+        -it kensonman/nginx-uwsgi /startup
