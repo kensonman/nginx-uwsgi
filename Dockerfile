@@ -26,8 +26,8 @@ RUN echo ">>> Installing the packages..." \
 && sed -i "59a\\\\tinclude /etc/nginx/sites-available/default.d/*.conf;" /etc/nginx/sites-available/default \
 && sed -i "37,41s/^/#/g" /etc/nginx/sites-available/default \
 && mkdir /etc/nginx/sites-available/default.d \
-&& echo "location /media { alias ${WORKDIR}/${DIR_MEDIA}; }" >> /etc/nginx/sites-available/default.d/path.conf \
-&& echo "location /static { alias ${WORKDIR}/${DIR_STATIC}; }" >> /etc/nginx/sites-available/default.d/path.conf \
+&& echo "location /${DIR_MEDIA} { alias ${WORKDIR}/${DIR_MEDIA}; }" >> /etc/nginx/sites-available/default.d/path.conf \
+&& echo "location /${DIR_STATIC} { alias ${WORKDIR}/${DIR_STATIC}; }" >> /etc/nginx/sites-available/default.d/path.conf \
 && echo "location / {\n     uwsgi_pass uwsgi;\n    include uwsgi_params;\n}" >> /etc/nginx/sites-available/default.d/path.conf \
 && chown -R ${USERNAME}:www-data /var/lib/nginx /var/log/nginx \
 && echo ">>> Configuring uwsgi..." \
